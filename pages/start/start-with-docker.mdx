@@ -1,0 +1,78 @@
+# 使用Docker部署
+---
+
+import {Callout, Steps} from "nextra/components"
+
+<Steps>
+    ### 准备工作
+    在开始使用Docker部署前，请创建一个data文件夹，用来保存配置文件与数据库
+    ```shell copy
+    mkdir ./data
+    touch config.json
+    ```
+    ### 设置默认密码
+    修改下方默认的配置信息中的`admin_password`(最短8位), 然后写入config.json中
+    <Callout type={'warning'}>
+        密码必须**手动设置**, 建议复杂一些
+    </Callout>
+```json copy
+{
+    "security": {
+        "admin_password": ""
+    },
+    "http": {
+        "host": "0.0.0.0",
+        "port": 9000,
+        "proxy-pass": {
+            "oaifree": {
+                "enable": true,
+                "host": "https://new.oaifree.com",
+                "port": 9001
+            },
+            "fuclaude": {
+                "enable": true,
+                "host": "https://demo.fuclaude.com",
+                "port": 9002
+            }
+        },
+        "title": "Pandora",
+        "rate": 1000
+    },
+    "database": {
+        "driver": "sqlite",
+        "dsn": "./data/data.db"
+    },
+    "share": {
+        "random": true,
+        "custom": true
+    },
+    "pandora": {
+        "domain": {
+            "chat": "https://chat.oaifree.com",
+            "token": "https://token.oaifree.com",
+            "index": "https://new.oaifree.com",
+            "claude": "https://demo.fuclaude.com"
+        }
+    },
+    "moderation": {
+        "apiKey": "",
+        "apiUrl": "https://api-proxy.oaipro.com/v1/moderations",
+        "message": "您的消息包含不当内容，请修改后重试!"
+    },
+    "oneapi": {
+        "token": "",
+        "domain": ""
+    },
+    "log": {
+        "level": "info",
+        "encoding": "console",
+        "output": "console",
+        "log_file_name": "./logs/server.log",
+        "max_backups": 30,
+        "max_age": 7,
+        "max_size": 1024,
+        "compress": true
+    }
+}
+    ```
+</Steps>
