@@ -1,1 +1,25 @@
 # 单文件部署
+
+import {Callout, Steps} from "nextra/components";
+
+<Steps>
+    ### 下载
+    你可以在[Github Release](https://github.com/nianhua99/PandoraHelper/releases/latest)下载压缩包, 然后解压它
+    ### 修改配置文件
+    修改 `data/config.json` 中的`admin_password`，并保存
+    <Callout type={'warning'}>
+        这是后台的访问密码, 必须**手动设置**, 最短8位, 建议复杂一些
+    </Callout>
+    ### 启动
+    ```shell
+    chmod 755 ./PandoraHelper
+    // 前台启动
+    ./PandoraHelper
+    // 后台启动
+    nohup ./PandoraHelper &
+    ```
+    ### 使用
+    现在, Pandora Helper已启动至9000端口, 你可以通过ip:端口的方式访问。
+    - 根目录首页是面向普通用户, 登录使用GPT的登录页
+    - **管理后台在 /admin 下**
+</Steps>

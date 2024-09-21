@@ -1,0 +1,73 @@
+# 配置文件
+---
+## 示例
+下面是一个示例的默认配置文件, 你可以使用默认的配置文件快速部署Helper：
+```json copy
+{
+  "security": {
+    "admin_password": ""
+  },
+  "http": {
+    "host": "0.0.0.0",
+    "port": 9000,
+    "proxy-pass": {
+      "oaifree": {
+        "enable": true,
+        "host": "https://new.oaifree.com",
+        "port": 9001
+      },
+      "fuclaude": {
+        "enable": true,
+        "host": "https://demo.fuclaude.com",
+        "port": 9002
+      }
+    },
+    "title": "Pandora",
+    "rate": 1000
+  },
+  "database": {
+    "driver": "sqlite",
+    "dsn": "./data/data.db"
+  },
+  "share": {
+    "random": true,
+    "custom": true
+  },
+  "pandora": {
+    "domain": {
+      "chat": "https://chat.oaifree.com",
+      "token": "https://token.oaifree.com",
+      "index": "https://new.oaifree.com",
+      "claude": "https://demo.fuclaude.com"
+    }
+  },
+  "moderation": {
+    "apiKey": "",
+    "apiUrl": "https://api-proxy.oaipro.com/v1/moderations",
+    "message": "您的消息包含不当内容，请修改后重试!"
+  },
+  "oneapi": {
+    "token": "",
+    "domain": ""
+  },
+  "log": {
+    "level": "info",
+    "encoding": "console",
+    "output": "console",
+    "log_file_name": "./logs/server.log",
+    "max_backups": 30,
+    "max_age": 7,
+    "max_size": 1024,
+    "compress": true
+  }
+}
+```
+
+## 解释
+下面是每个配置项的说明
+
+import {Callout} from "nextra/components"
+
+<Callout type={"info"}>
+    这里只是简单说明，具体配置方法和注意事项在各子功能里再作解释。
+</Callout>

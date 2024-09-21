@@ -1,20 +1,19 @@
-# 使用Docker部署
----
-
-import {Callout, Steps} from "nextra/components"
+import {Collapse} from "nextra-theme-docs";import {Callout, Steps} from "nextra/components"
 
 <Steps>
     ### 准备工作
     在开始使用Docker部署前，请创建一个data文件夹，用来保存配置文件与数据库
     ```shell copy
-    mkdir ./data
+    mkdir data
+    cd data
     touch config.json
     ```
     ### 设置默认密码
-    修改下方默认的配置信息中的`admin_password`(最短8位), 然后写入config.json中
+    修改下方默认的配置信息中的`admin_password`, 然后写入config.json中
     <Callout type={'warning'}>
-        密码必须**手动设置**, 建议复杂一些
+        这是后台的访问密码, 必须**手动设置**, 最短8位, 建议复杂一些
     </Callout>
+
 ```json copy
 {
     "security": {
@@ -75,4 +74,17 @@ import {Callout, Steps} from "nextra/components"
     }
 }
     ```
+    ### 拉取并启动Docker容器
+    ```shell
+    docker pull q11391/pandora-helper
+    docker run -d --net=bridge \
+        -p 9000:9000 \
+        -v ./data:/app/data \
+        q11391/pandora-helper
+    ```
+    ### 使用
+    现在, Pandora Helper已启动至9000端口, 你可以通过ip:端口的方式访问。
+    - 根目录首页是面向普通用户, 登录使用GPT的登录页
+    - **管理后台在 /admin 下**
 </Steps>
+
