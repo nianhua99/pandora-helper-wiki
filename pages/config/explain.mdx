@@ -1,0 +1,106 @@
+import {Callout} from "nextra/components"
+
+## 解释
+
+<Callout type={"info"}>
+    这里只是简单说明，具体配置方法和注意事项在各子功能里再作解释。
+</Callout>
+
+---
+### `security`
+#### `admin_password`
+管理员密码，用于登录后台管理界面
+
+---
+### `http`
+#### `host`
+HTTP服务监听的地址
+#### `port`
+HTTP服务监听的端口
+#### `proxy-pass`
+反代服务，用于代理Oaifree/fuclaude服务
+##### `enable`
+是否启用
+##### `host`
+反代的地址, 建议使用默认地址
+##### `port`
+反代出的端口
+#### `title`
+网站标题, 普通用户会在登录页看到
+#### `rate`
+限制用户请求频率，代表每分钟站点允许的请求次数
+
+---
+### `database`
+#### `driver`
+数据库驱动, 默认使用sqlite, 可选值位为：
+- sqlite
+- mysql
+- postgres
+- mssql
+- oracle
+#### `dsn`
+数据库连接地址, 默认为sqlite文件路径, 下面是其他数据库的示例：
+- mysql: `root:123456@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local`
+- postgres: `host=localhost port=5432 user=postgres password=123456 dbname=dbname sslmode=disable`
+- mssql: `sqlserver://username:password@localhost:1433?database=dbname`
+- oracle: `oracle://username:password@localhost:1521/dbname`
+
+---
+
+### `share`
+当系统内有账号的**分享**属性打开时，用户可以在 /share 页面中选择账号使用，一般用于设立公益站点或账号池站点
+#### `random`
+是否启用随机分享
+#### `custom`
+是否允许用户自主选择分享账号
+
+---
+
+### `pandora`
+#### `domain`
+helper本身主要管理与组织你的账号与共享用户，需要结合Oaifree/fuclaude等服务使用，这里需要配置这些服务的地址
+
+<Callout type={"warning"}>
+    请确保Helper能访问下面这些域名。
+</Callout>
+
+##### `chat`
+生成ShareToken的地址
+##### `token`
+根据Refresh Token生成账号Access Token的地址
+##### `index`
+**重要**，用户的ChatGPT聊天页地址
+- 默认使用`new.oaifree.com`
+- 如果你自行反代了Oaifree服务, 在这里填写你反代后的地址
+- 如果使用Helper自带的反代, 也需要设置为目标反代地址
+##### `claude`
+**重要**，用户的Claude聊天页地址
+
+---
+
+### `moderation`
+OpenAI道德审查服务, 用于检查用户输入的内容是否合法
+
+<Callout type="default">
+    只有开启了Helper自带的反代功能，才能使用这个服务
+</Callout>
+
+#### `apiKey`
+Moderation服务的API Key
+#### `apiUrl`
+Moderation服务的API地址
+
+---
+
+### `oneapi`
+对接OneAPI服务，用于将Refresh Token刷新的Access Token自动更新到OneApi指定的渠道中，配合Chat2Api使用
+#### `token`
+OneAPI服务的Token, 请在OneAPI -> 设置 -> 生成系统访问令牌中生成
+#### `domain`
+OneAPI服务的域名
+
+---
+
+### `log`
+日志配置
