@@ -1,0 +1,44 @@
+import {
+    Callout
+} from "nextra/components";
+import Image from 'next/image'
+import AddAccount from "/assets/images/add-account.png"
+import ListAccount from "/assets/images/list-account.png"
+
+# 账号管理
+
+你可以在Helper中集中管理你的ChatGPT/Claude账号，尤其是管理这些账号的各种**Token**，Token是用来访问ChatGPT/Claude服务的核心。
+
+<Callout>
+    这里的账号是最底层的OpenAi/Claude账号，这是后续创建共享用户的基础。
+</Callout>
+
+<Callout type={"warning"}>
+    声明：Pandora Helper不会保存你的账号信息，本项目所有代码是开源的，你可以自行检查相关代码逻辑。
+</Callout>
+
+## 1. 添加账号
+
+在`账号管理`菜单中，有**ChatGPT**与**Claude**两个账号管理页面，你可以在这里添加对应的账号。
+### 表单项
+- **邮箱与密码**：你可以在这记录这个账号的邮箱密码，**但是它不会起到任何作用，只用来标记而已**
+- **共享**：打开后，这个账号将出现在 /share 页面中, 任何人都可以直接使用这个账号
+- **Access Token (ChatGPT)**: ChatGPT的Token，它是访问ChatGPT服务的凭证。
+    - 可以在 [OpenAI](https:///chat.openai.com/api/auth/session) 获取, 这是最通用的获取方式。
+    - 还可以在 [Oaifree](https://token.oaifree.com/auth) 获取, 前提是你有[LINUX DO](https://www.linux.do)账号。 注意: Google/Microsoft 第三方一键登录的账号无法使用此方式。
+    - **有效期为10天，过期后需要重新获取**
+- **Refresh Token (ChatGPT)**: ChatGPT的刷新Token，用于获取新的Access Token。
+    - 推荐在 [Oaifree](https://token.oaifree.com/auth) 获取, 前提是你有[LINUX DO](https://www.linux.do)**三级账号**。 注意: Google/Microsoft 第三方一键登录的账号无法使用此方式。
+    - 你还可以自行研究如何获取Refresh Token, **门槛比较高**, 参考这位大佬的帖子 [自己搞 refresh token](https://linux.do/t/topic/42253)
+    - **长期有效**，但是它不是必填的。如果你不填写，手动更新Access Token即可
+- **Session Key (Claude)**: Claude的Session Key，它是访问Claude服务的凭证。
+    - 需要在 [Fuclaude](https://demo.fuclaude.com/) 登录后, 再访问 [Fuclaude Auth](https://demo.fuclaude.com/api/auth/session) 获取。
+    - **有效期未知, 一般是长期的**
+---
+<Image src={AddAccount} alt="添加账号" />
+
+## 2. 账号列表
+
+在`账号管理`菜单中，你可以看到你添加的账号列表，你可以在这里查看账号的详细信息，也可以删除账号。下面图中是各功能的介绍。
+
+<Image src={ListAccount} alt="账号列表" />
