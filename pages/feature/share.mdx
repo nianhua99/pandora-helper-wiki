@@ -1,0 +1,80 @@
+import {
+    Callout
+} from "nextra/components";
+import Image from 'next/image'
+import AddShare from "/assets/images/add-share.png"
+import ListShare from "/assets/images/list-share.png"
+import LoginShare from "/assets/images/login-share.png"
+import ChatShare from "/assets/images/chat-share.png"
+import StatShare from "/assets/images/statistic-share.png"
+
+# 分享
+
+分享是Pandora Helper的核心功能，它可以让你与你的小伙伴共享同一份ChatGPT/Claude服务。
+
+## 分享用户
+
+一个ChatGPT/Claude账号可以被多个用户共享，每个用户都有自己的独立的**Share Token**，这样就可以实现多人共享一个账号。
+也就是说, 共享用户虽然实际使用的是同一个账号，但是他们之间却是独立的。
+
+### 添加共享用户
+
+在 **账号管理** 页面中，点击共享列的**＋**号即可新增一个共享用户。
+
+- **Unique Name**：共享用户的账号, 它需要是全局唯一的
+- **密码**：共享用户的密码, 你可以设置一个随机值, 后续共享用户可以使用原密码更改新的密码。
+- **有效期至**：此账户的有效期，到期后，共享用户将无法登录。
+- **站点限制**：共享用户在创建后会生成一个**Share Token**，这个Token可以在任意Oaifree/Pandora Helper站点中使用，如果你不会告知用户**Share Token**, 则无需设置此项。
+- **模型使用次数限制**：共享用户可以使用的模型次数上限, -1表示无限制, 0表示禁止使用此模型。
+- **每天重置限额**：是否每天重置模型使用次数限制, 如果勾选，则上方设置的次数含义变为每天的限制次数。反之则为整个有效期内总共的限制次数。
+- **会话隔离**：开启后，共享用户之间无法看到、删除其他共享用户的对话记录。**建议开启**
+- **临时聊天**：开启后，共享用户无法保存自己的对话记录。每次对话都是新的对话。
+
+<Callout type={"info"}>
+    创建后，你需要将**Unique Name**与**密码**告知用户，他们可以在首页使用这个信息登录。
+</Callout>
+
+<Callout >
+    以上特殊设置仅ChatGPT可用，Claude暂不支持。
+</Callout>
+
+---
+
+<Image src={AddShare} alt="添加共享用户" />
+
+## 共享列表
+
+在 **分享管理** 页面中，你可以看到你添加的共享用户列表，你可以在这里查看共享用户的详细信息，也可以删除共享用户。
+
+列表页默认使用**简洁排版**，这隐藏了一些不常用的字段，你可以点击按钮查看完整信息。
+
+---
+<Image src={ListShare} alt="共享用户列表" />
+
+## 用量统计
+
+在**账号管理**中，点击共享列的**📊**号即可查看共享用户的用量统计。
+
+**这是当天00:00至23:59的统计数据**，你可以查看每个用户每个模型的使用次数.
+
+---
+<Image src={StatShare} alt="共享用户用量统计" />
+
+## 共享用户登录
+
+作为共享用户，如何使用Pandora Helper呢？
+
+- 首先，你需要知道**Unique Name**与**密码**，这是你的登录凭证
+- 然后，你可以在首页或/login页面输入它，并登录。Pandora Helper提供了一个类似官方的登录页面。
+- 这就是全部！共享用户无需关心账号信息以及背后的逻辑，就像直接使用OpenAI/Claude一样。
+
+---
+<Image src={LoginShare} alt="共享用户登录" />
+
+登陆后，共享用户将进入一个1:1的对话页面。
+别人的对话记录对你是不可见的，你的对话记录也不会被别人看到。这些记录会显示为一个🔒。
+
+---
+<Image src={ChatShare} alt="共享用户对话" />
+```
+
