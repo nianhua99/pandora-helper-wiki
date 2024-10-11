@@ -1,0 +1,60 @@
+import {Callout} from "nextra/components"
+
+# 反向代理
+
+Helper通过内置的反向代理，可以实现一些非常有用的功能，例如：
+- **对话内容敏感词审查(道德审查)**
+- **聊天记录留存**
+
+## 开启反代
+### 1. 修改`proxy-pass`配置
+在`config.json`中，找到`http.proxy-pass`，将`enable`设置为`true`，并配置`host`和`port`。
+
+```json
+{
+    "http": {
+        "proxy-pass": {
+            "oaifree": {
+                "enable": true,
+                "host": "https://new.oaifree.com",
+                "port": 9001
+            },
+            "fuclaude": {
+                "enable": true,
+                "host": "https://demo.fuclaude.com",
+                "port": 9002
+            }
+        }
+    }
+}
+```
+`host`使用上面的默认地址即可。但是端口需要根据你的实际情况进行修改。
+
+<Callout type={"warning"}>
+    **重要**：
+    Helper会在上面的两个端口`9001`和`9002`上启动反向代理服务。
+
+    你需要用**你的域名或IP**指向这两个端口。保证这两个端口能够访问。
+    这里举例：
+    - `https://gpt.yourdomain.com` 指向了Helper的9001端口
+    - `https://123.123.123.123` 指向了Helper的9002端口，这里假定我部署helper机器的IP是123.123.123.123
+</Callout>
+
+### 2. 修改`pandora.domain`配置
+在`config.json`中，找到`pandora.domain`, 根据上面的例子，配置`claude`和`index`项。
+
+```json
+{
+    "pandora": {
+        "domain": {
+          "chat": "https://chat.oaifree.com",   //  不用修改
+          "token": "https://token.oaifree.com", //  不用修改
+          "index": "https://gpt.yourdomain.com",
+          "claude": "https://123.123.123.123"
+        }
+    }
+}
+```
+
+### 3. 重启Helper
+重启Helper，使配置生效。请阅读下一节查看如何开启对话内容敏感词审查和聊天记录留存功能。

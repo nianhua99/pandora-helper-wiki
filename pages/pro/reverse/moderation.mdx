@@ -1,0 +1,27 @@
+import {Callout} from "nextra/components"
+
+# 对话内容敏感词审查
+Helper可以拦截用户的对话请求，并对每条消息先进行审查，再发送到ChatGPT/Claude服务。
+
+<Callout type="info">
+    开启本功能可以大大降低违规封号风险，但是会增加少量延迟。
+</Callout>
+
+## 开启方法
+1. Helper需要访问OpenAI Moderation API，所以你首先需要有一个Api Key
+2. 在`config.json`中，找到`moderation`配置，填入你的`apiKey`和`apiUrl`。
+3. `message`是审查不通过时返回给用户的提示信息。
+
+```json
+{
+    "moderation": {
+        "apiKey": "",
+        "apiUrl": "https://api-proxy.oaipro.com/v1/moderations",
+        "message": "您的消息包含不当内容，请修改后重试!"
+    }
+}
+```
+
+<Callout type="default">
+    只有开启了Helper自带的反代功能，才能使用这个服务
+</Callout>
